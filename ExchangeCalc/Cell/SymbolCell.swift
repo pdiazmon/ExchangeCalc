@@ -36,39 +36,8 @@ extension SymbolCell {
     
     func render(_ model: Symbol) {
         self.symbolTxt.text = model.symbol
-        self.flagImg.image = model.flag
-        self.flagImg.setNeedsDisplay()
-      
-        /*
-        if let flag = model.flag {
-            self.flagImg.image  = flag
-        }
-        else {
-            if let img = ExchangeModel.shared.flagsDict[model.symbol] {
-                DispatchQueue.main.async {            
-                    self.flagImg.image = img
-                    self.flagImg.setNeedsDisplay()            
-                }
-            }
-            else {
-                let imageUrl = URL(string: "https://raw.githubusercontent.com/transferwise/currency-flags/master/src/flags/\(model.symbol.lowercased()).png")
-
-                DispatchQueue.global(qos: .userInitiated).async {
-                    let imageData = NSData(contentsOf: imageUrl!)
-                
-                    if let data = imageData {
-                        let newImg    = UIImage(data: data as Data)
-                        ExchangeModel.shared.flagsDict[model.symbol] = newImg
-                
-                        DispatchQueue.main.async {
-                            self.flagImg.image = newImg
-                            self.flagImg.setNeedsDisplay()
-                        }
-                    }
-                }           
-            }
-        }
-        */
+        self.flagImg.image  = model.flag
+        self.flagImg.setNeedsDisplay()      
     }
 }
 
