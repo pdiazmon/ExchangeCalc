@@ -106,7 +106,6 @@ extension MainViewController {
             }
             .disposed(by: bag)
         
-      
         // If any of the from/to symbol or amount is changed, request the exchange value based on their values
         Observable.combineLatest(modelAmount.asObservable(), modelFrom.asObservable(), modelTo.asObservable())
         { amount, from, to in
