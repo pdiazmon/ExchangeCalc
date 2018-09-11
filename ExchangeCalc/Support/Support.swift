@@ -23,7 +23,7 @@ public enum SyncMode {
     case async
 }
 
-public func getJSONData<Type: Decodable>(sync: SyncMode, url: String, queryItems: [String: String], completion: ((Result<Type>) -> Type)?) {
+public func getJSONData<T: Decodable>(sync: SyncMode, modelType: T.Type, url: String, queryItems: [String: String], completion: ((Result<T>) -> Void)?) {
     
     // Compose the URL components
     let _url             = URL(string: url)
@@ -68,7 +68,7 @@ public func getJSONData<Type: Decodable>(sync: SyncMode, url: String, queryItems
             // If we have received an error ...
             // if not, responseError should be nil
             if let error = responseError {
-                _ = completion?(.failureError(error))
+                completion?(.failureError(error))
             }
                 // If we have received data ...
                 // if not, responseData should be nil
@@ -76,17 +76,17 @@ public func getJSONData<Type: Decodable>(sync: SyncMode, url: String, queryItems
                 let decoder = JSONDecoder()
                 
                 do {
-                    let myData = try decoder.decode(Type.self, from: jsonData)
-                    _ = completion?(.success(myData))
+                    let myData = try decoder.decode(modelType, from: jsonData)
+                    completion?(.success(myData))
                 }
                 catch {
-                    _ = completion?(.failureError(error))
+                    completion?(.failureError(error))
                 }
             }
                 // If no error received, neither responseData received, something went wrong
             else {
                 let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey : "Data was not retrieved from request"]) as Error
-                _ = completion?(.failureError(error))
+                completion?(.failureError(error))
             }
         }
         

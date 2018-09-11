@@ -110,22 +110,22 @@ extension MainViewController {
         Observable.combineLatest(modelAmount.asObservable(), modelFrom.asObservable(), modelTo.asObservable())
         { amount, from, to in
             
-            getJSONData(sync: .async, url: "https://forex.1forge.com/1.0.3/convert",
+            getJSONData(sync: .async,
+                        modelType: Conversion.self,
+                        url: "https://forex.1forge.com/1.0.3/convert",
                         queryItems: [ "from": from.symbol,
                                       "to": to.symbol,
                                       "quantity": amount,
                                       "api_key": "u99mLgK7hizT4NeAAXn52cLkdhhQWGsQ"])
             // completion closure
-            { result -> Conversion in
-                
+            { result  in
                 // Depending on the result
                 switch result {
                 case .success(let conversion):
                     self.ResultLabel.text = "\(self.modelAmount.value) \(self.modelFrom.value.symbol!) = \(String(format: "%.2f", conversion.value)) \(self.modelTo.value.symbol!)"
-                    return conversion
                     
                 case .failureError(let error):
-                    return Conversion(value: 0, text: "", timestamp: 0)
+                    break
                 }
                 
             }
@@ -206,9 +206,11 @@ extension MainViewController {
 
     func getAllSymbols() {
         
-        getJSONData(sync: .async, url: "https://forex.1forge.com/1.0.3/symbols",
+        getJSONData(sync: .async,
+                    modelType: [String].self,
+                    url: "https://forex.1forge.com/1.0.3/symbols",
                     queryItems: ["api_key": "u99mLgK7hizT4NeAAXn52cLkdhhQWGsQ"])
-        { result -> [String] in
+        { result in
             
             // Depending on the result
             switch result {
@@ -236,8 +238,6 @@ extension MainViewController {
                 
                 ExchangeModel.shared.symbols          = tmpSymbols
                 ExchangeModel.shared.ObsSymbols.value = tmpSymbols
-                
-                return symbols
                 
             case .failureError(let error):
                 fatalError("error \(error.localizedDescription)")
