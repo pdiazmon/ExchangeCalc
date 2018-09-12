@@ -39,7 +39,9 @@ class SymbolsViewController: UIViewController {
     public func prepare(sender: MainViewController, origin: CurrencyOrigin, filter: String?) {
       self.origin = origin
       self.sender = sender
-      ExchangeModel.shared.ObsSymbols.value = ExchangeModel.shared.symbols.filter { $0.symbol! != filter! }
+      ExchangeModel.shared.ObsSymbols.value = ExchangeModel.shared.symbols
+        .filter { $0.symbol! != filter! }
+        .sorted { $0.symbol < $1.symbol }
     }
     
 }

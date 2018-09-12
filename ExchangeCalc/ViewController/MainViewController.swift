@@ -106,6 +106,20 @@ extension MainViewController {
             }
             .disposed(by: bag)
         
+        // When selecting the From and To currency symbols, set the amount to 1 by default to provide a quick conversion
+        Observable.combineLatest(modelFrom.asObservable(), modelTo.asObservable())
+        { from, to in
+            guard let curText = self.AmountText.text else { return }
+            guard self.modelFrom.value.symbol.count == 3 && self.modelTo.value.symbol.count == 3 else { return }
+            
+            if (curText.count == 0) {
+                self.AmountText.text = "1"
+                self.AmountText.sendActions(for: .valueChanged)
+            }
+        }
+        .subscribe { value in } // empty subscribe just to activate the observer
+        .disposed(by: bag)
+        
         // If any of the from/to symbol or amount is changed, request the exchange value based on their values
         Observable.combineLatest(modelAmount.asObservable(), modelFrom.asObservable(), modelTo.asObservable())
         { amount, from, to in
@@ -212,17 +226,19 @@ extension MainViewController {
                     queryItems: ["api_key": "u99mLgK7hizT4NeAAXn52cLkdhhQWGsQ"])
         { result in
             
+            let queue = DispatchQueue(label: "flags-queue", qos: .utility)
+            
             // Depending on the result
             switch result {
                 
             case .success(let symbols):
                 
-                var tmpSymbols: [Symbol] = []
+                ExchangeModel.shared.symbols = []
                 
-                for symbol in (symbols.map{String($0.dropLast(3))} + symbols.map{String($0.dropFirst(3))}) {
+                for symbol in Set(symbols.map{String($0.dropLast(3))} + symbols.map{String($0.dropFirst(3))}) {
                     
-                    
-                    if (!tmpSymbols.map { $0.symbol }.contains(symbol)) {
+                    queue.async {
+                        
                         let imageUrl = URL(string: "https://raw.githubusercontent.com/transferwise/currency-flags/master/src/flags/\(symbol.lowercased()).png")
                         var img: UIImage? = nil
                         
@@ -232,19 +248,17 @@ extension MainViewController {
                         else {
                             img = UIImage(named: "flag.png")
                         }
-                        tmpSymbols.append(Symbol(flag: img, symbol: symbol))
+                        ExchangeModel.shared.symbols.append(Symbol(flag: img, symbol: symbol))
+                        ExchangeModel.shared.ObsSymbols.value = ExchangeModel.shared.symbols.sorted { $0.symbol < $1.symbol }
+                        
                     }
                 }
-                
-                ExchangeModel.shared.symbols          = tmpSymbols
-                ExchangeModel.shared.ObsSymbols.value = tmpSymbols
                 
             case .failureError(let error):
                 fatalError("error \(error.localizedDescription)")
             }
             
         }
-        
     }
 }
 
