@@ -16,11 +16,11 @@
 		EB04201E2139BE9D00087EA7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB04201C2139BE9D00087EA7 /* LaunchScreen.storyboard */; };
 		EB0420292139BE9D00087EA7 /* ExchangeCalcTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0420282139BE9D00087EA7 /* ExchangeCalcTests.swift */; };
 		EB0420342139BE9D00087EA7 /* ExchangeCalcUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0420332139BE9D00087EA7 /* ExchangeCalcUITests.swift */; };
-		EB37F6B5213DB6E100414A87 /* SymbolCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB37F6B4213DB6E100414A87 /* SymbolCell.swift */; };
 		EB5D28B8213C4A4200DDED78 /* Support.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5D28B7213C4A4200DDED78 /* Support.swift */; };
 		EB5D28BA213C4C6100DDED78 /* ExchangeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5D28B9213C4C6100DDED78 /* ExchangeModel.swift */; };
-		EB5D28BC213C506F00DDED78 /* SymbolsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5D28BB213C506F00DDED78 /* SymbolsViewController.swift */; };
 		EB5D28C0213C547F00DDED78 /* SymbolCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5D28BF213C547F00DDED78 /* SymbolCellModel.swift */; };
+		EBAE4308214E4AA700F77020 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAE4307214E4AA700F77020 /* CollectionViewCell.swift */; };
+		EBAE430C214E54A700F77020 /* SymbolsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAE430B214E54A700F77020 /* SymbolsCollectionViewController.swift */; };
 		EF17A9D51C3B25332C3272D7 /* Pods_ExchangeCalcTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB490DDC4F627F648AF24228 /* Pods_ExchangeCalcTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -64,11 +64,11 @@
 		EB04202F2139BE9D00087EA7 /* ExchangeCalcUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExchangeCalcUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB0420332139BE9D00087EA7 /* ExchangeCalcUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeCalcUITests.swift; sourceTree = "<group>"; };
 		EB0420352139BE9D00087EA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EB37F6B4213DB6E100414A87 /* SymbolCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolCell.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		EB5D28B7213C4A4200DDED78 /* Support.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Support.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		EB5D28B9213C4C6100DDED78 /* ExchangeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeModel.swift; sourceTree = "<group>"; };
-		EB5D28BB213C506F00DDED78 /* SymbolsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolsViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		EB5D28BF213C547F00DDED78 /* SymbolCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolCellModel.swift; sourceTree = "<group>"; };
+		EBAE4307214E4AA700F77020 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; wrapsLines = 0; };
+		EBAE430B214E54A700F77020 /* SymbolsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolsCollectionViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,7 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				EB0420152139BE9C00087EA7 /* MainViewController.swift */,
-				EB5D28BB213C506F00DDED78 /* SymbolsViewController.swift */,
+				EBAE430B214E54A700F77020 /* SymbolsCollectionViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -199,7 +199,7 @@
 		EBF87B5121403C89007F11CB /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				EB37F6B4213DB6E100414A87 /* SymbolCell.swift */,
+				EBAE4307214E4AA700F77020 /* CollectionViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -425,11 +425,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB0420162139BE9C00087EA7 /* MainViewController.swift in Sources */,
-				EB37F6B5213DB6E100414A87 /* SymbolCell.swift in Sources */,
+				EBAE430C214E54A700F77020 /* SymbolsCollectionViewController.swift in Sources */,
+				EBAE4308214E4AA700F77020 /* CollectionViewCell.swift in Sources */,
 				EB5D28B8213C4A4200DDED78 /* Support.swift in Sources */,
 				EB0420142139BE9C00087EA7 /* AppDelegate.swift in Sources */,
 				EB5D28BA213C4C6100DDED78 /* ExchangeModel.swift in Sources */,
-				EB5D28BC213C506F00DDED78 /* SymbolsViewController.swift in Sources */,
 				EB5D28C0213C547F00DDED78 /* SymbolCellModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

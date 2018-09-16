@@ -58,10 +58,10 @@ extension MainViewController {
   
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "FromSegue") {
-            (segue.destination as? SymbolsViewController)?.prepare(sender: self, origin: .from, filter: modelTo.value.symbol)
+            (segue.destination as? SymbolsCollectionViewController)?.prepare(sender: self, origin: .from, filter: modelTo.value.symbol)
         }
         else if (segue.identifier == "ToSegue") {
-            (segue.destination as? SymbolsViewController)?.prepare(sender: self, origin: .to, filter: modelFrom.value.symbol)
+            (segue.destination as? SymbolsCollectionViewController)?.prepare(sender: self, origin: .to, filter: modelFrom.value.symbol)
         }
     }
     
